@@ -1,0 +1,13 @@
+Daniel Wu
+10/1/2024
+Professor Smallberg - CS 31
+
+Report: Getting Started With C++
+
+Step 5: Run the program with input integers that cause it to produce incorrect, unusual, nonsensical output. I inputted the number of people surveyed to be 100, but the number of people who say will vote for Trump at 200 and the number of people who say will vote for Harris at 300. These inputs give an output of 300% voting for Harris and 200% voting for Trump, which is not possible. 
+
+Step 6: Logic Error - I changed the last if condition to if forHarris was smaller than forTrump it would print “Harris is predicted to win the election”. I changed the inequality operator where people often make a mistake, which allows the program to build successfully, but display the wrong prediction, even though they entered the right numbers. (Ex. If forHarris had 40 and forTrump had 60, it would display “Harris is predicted to win the election” instead of Tump)
+
+Step 7: Compiler Error - For the first compiler error I created, I removed a semicolon from line 9 where the variable numberSurveyed was declared. This created an error on line 10 when declaring the variable forHarris and produced the message “expected initializer before ‘int’ ”.  This also caused the error “ ‘numberSurveyed’ was not declared in this scope” and since the error also affected the line below it when declaring forHarris another error “ ‘forHarris’ was not declared in this scope” also showed up. The second compiler error I created was removing the ‘l’ from endl in line 26, which could be a mistake many programmers forget. This gave the error message “no match for ‘operator<<’ ”. 
+
+

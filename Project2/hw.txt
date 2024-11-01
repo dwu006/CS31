@@ -1,0 +1,54 @@
+Fall 2024 CS 31
+Homework 2
+    
+1. 
+Ouput:
+endlendl
+grendel
+
+
+2. Prints a right angle triangle with base and height of given number.
+
+3.
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int side;
+
+	cout << "Enter a number: ";
+	cin >> side;
+
+	for (int i = 0; i < side; i++)
+	{
+		int j = i;
+		while(j >= 0)
+		{
+			cout << "#";
+			j--;
+		}
+		cout << "\n";
+	}
+}
+
+4.
+switch(codeSection)
+{
+	case 281: 
+		cout << "bigamy";
+		break;
+	case 321:
+	case 322:
+		cout << "selling illegal lottery tickets";
+		break;
+	case 383:
+		cout << "selling rancid butter";
+		break;
+	case 598:
+		cout << "injuring a bird in a public cemetery";
+		break;
+	default:
+		cout << "some other crime";	
+		break;	
+}

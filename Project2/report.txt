@@ -1,0 +1,20 @@
+Daniel Wu, Fall 2024 CS 31 - Homework 2
+
+Report:
+a. I accidentally uninstalled msys2 because I forgot I need that for the g++ compiler in visual studio code, so that took awhile to figure out. For the project, I had a little difficulty with cin and getline. I forgot to use cin.ignore which kept skipping the customer name input and going to the luxury car input and made a mistake of not initializing the rentalCharge variable at the start.
+
+b. 
+Negative starting odometer reading (-100)
+Smaller ending odometer reading (100, 50)
+Negative Rental Days (50, 100, -1)
+Empty String for customer name (50, 100, 4, "")
+Didn't enter y or n for luxury status (50, 100, 4, "Daniel Wu", a)
+Entered 0 for month number (50, 100, 4, "Daniel Wu", "y", 0)
+Example 1 in project specs (2417, 2754, 4, "Mario Andretti", "n", 10)
+Example 2 in project specs (1885, 1973, 1, "Danica Patrick", "y", 2)
+Rental Car with 90 driven miles (0, 90, 1, "Daniel Wu", "n", 6)
+Rental Car with 100 driven miles (0, 100, 1, "Daniel Wu", "n", 6)
+Rental Car with 400 driven miles in December (0, 400, 1, "Daniel Wu", "n", 12)
+Rental Car with 400 drive miles in November (0, 400, 1, "Daniel Wu", "n", 11)
+Rental Car with 600 driven miles (0, 600, 1, "Daniel Wu", "n", 6)
+Rental Car with 800 driven miles (0, 800, 1, "Daniel Wu", "n", 6)
