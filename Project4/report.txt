@@ -1,0 +1,44 @@
+Daniel Wu - CS31 Fall 2024 - Project 4 Report
+
+a. I had to make sure I wasn't going out of bounds when looping or accessing values through an array. Also, I had to make sure I didn't
+have any infinte loops. I wanted to create a new array for separate function, but you can't when you don't know the array size and you 
+can't just rearrange the strings randomly without checking both of them. I also had to make sure my algorithms worked when the test case 
+only wanted to look at a portion of the array indicated by the parameter 'n'. 
+
+b. TEST CASES: 
+
+string h[7] = { "melania", "kamala", "donald", "tim", "", "doug", "jd" };
+assert(lookup(h, 7, "doug") == 5); --> tests if it can find value at right pos
+assert(lookup(h, 2, "donald") == -1); --> tests if it can find value when part of the array is accessed
+assert(positionOfMax(h, 7) == 3); -- > tests if it can find the pos of largest value string
+
+string g[4] = { "melania", "kamala", "jd", "usha" }; 
+assert(differ(h, 4, g, 4) == 2); --> checks if return value is the starting pos of where both arrays are not equal
+assert(appendToAll(g, 4, "?") == 4 && g[0] == "melania?" && g[3] == "usha?"); --> tests if adding a value to the end of a string works 
+assert(rotateLeft(g, 4, 1) == 1 && g[1] == "jd?" && g[3] == "kamala?"); --> tests if pos at 1 is moved to the end and other values are shifted left
+
+string e[4] = { "donald", "tim", "", "doug" };
+assert(subsequence(h, 7, e, 4) == 2);  --> checks if the array e is in array h and returns the starting pos in array h
+
+string d[5] = { "kamala", "kamala", "kamala", "tim", "tim" };
+assert(countRuns(d, 5) == 2); --> checks if it correclty idenifies the amount of different consecutive sequences
+
+string f[3] = { "jd", "donald", "gwen" };
+assert(lookupAny(h, 7, f, 3) == 2); --> finds the smallest pos of an value in array h that is also in array f
+assert(flip(f, 3) == 3 && f[0] == "gwen" && f[2] == "jd"); --> checks if the array is correctly flipped horizontall
+
+assert(separate(h, 7, "jd") == 3); --> checks if the values are reaarange correclty wih strings < than "jd" first than all the rest
+
+string arr[4] = {"apple", "banana", "cherry", "date"};
+assert(separate(arr, 4, "cherry") == 2); --> apple and banna smaller than cherry
+
+string arr2[3] = {"fig", "apple", "banana"};
+assert(separate(arr2, 3, "banana") == 1); --> apple smaller than banana
+
+string arr3[3] = {"fig", "grape", "apple"};
+assert(separate(arr3, 3, "grape") == 2);  --> apple and fig smallr than grape
+
+assert(separate(arr3, 0, "grape") == 0); --> returns 0 since passed array size is 0
+
+
+

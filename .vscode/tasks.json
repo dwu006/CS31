@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build", // Task name referenced in launch.json
+        "type": "shell",
+        "command": "g++",
+        "args": [
+          "-g", // Include debugging information
+          "${file}", // The current file to compile
+          "-o", 
+          "${workspaceFolder}/a.exe" // Output executable
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": ["$gcc"]
+      }
+    ]
+  }
+  

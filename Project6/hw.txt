@@ -1,0 +1,258 @@
+1. The subparts to this problem involve errors in the use of pointers.
+
+a. 
+    int main()
+    {
+        int arr[3] = { 5, 10, 15 };
+        int* ptr = arr;
+
+        *ptr = 30; //sets value at address to 30
+        ptr++;     // moves address to next spot 
+        *ptr = 20; //sets value at address to 20
+        ptr++;     // moves address to next spot
+        *ptr = 10; //sets value at address to 10
+
+        ptr = arr; // sets address to start of arr
+
+        while (ptr <= arr+2)
+        {
+            cout << *ptr << endl;  
+            ptr++;   // print values
+        }
+    }
+    
+b. 
+    The function doesnt work because the parameter pToMax is only a copy of the pointer variable ptr.
+    You need to add an extra & sign to make it a reference parameter
+
+    void findMax(int arr[], int n, int*& pToMax) // added & to make the pointer a reference var
+    {
+        if (n <= 0) 
+            return;      
+    
+        pToMax = arr;
+
+        for (int i = 1; i < n; i++)
+        {
+            if (arr[i] > *pToMax)
+                 pToMax = arr + i;
+        }
+    }       
+
+    int main()
+    {
+        int nums[4] = { 5, 3, 15, 6 };
+        int* ptr = &nums[0];
+
+        findMax(nums, 4, ptr);
+        cout << "The maximum is at address " << ptr << endl;
+        cout << "It's at position " << ptr - nums << endl;
+        cout << "Its value is " << *ptr << endl;
+    }
+c. 
+    The function doesn't work because ptr is declared but never initialized.
+    I create a variable a and set its value to 1 and sets its address to ptr.
+
+    void computeCube(int n, int* ncubed)
+    {
+        *ncubed = n * n * n;
+    }
+
+    int main()
+    {
+        int a = 1; // created new variable
+        int* ptr = &a;  //initialized ptr
+        computeCube(5, ptr);
+        cout << "Five cubed is " << *ptr << endl;
+    }
+d. 
+    The problem with the function is that str1 aren't set to pointers so you aren't able
+    to check for when the cstring ends correctly or compare characters at str1 to str2 correctly.
+    Also you need to check if they both end at the same time, by checking if the value of the pointer 
+    when it exits the loop is equal to a null byte.
+
+      // return true if two C strings are equal
+    bool strequal(const char str1[], const char str2[])
+    {
+        while (*str1 != 0  &&  *str2 != 0) // added *
+        {
+            if (*str1 != *str2)  // added *
+                return false;
+            str1++;            
+            str2++;
+        }
+        return *str1 == '\0' && *str2 == '\0'; // added * and make them compare to null byte
+    }
+
+    int main()
+    {
+        char a[15] = "Alex H.";
+        char b[15] = "Alex T.";
+
+        if (strequal(a,b))
+            cout << "They're the same person!\n";
+    }
+
+e.
+    The problem is that the function getPtrToArray creates a local array (anArray). When the function ends
+    and f() is called the array junk overrides anArray and the ptr now points to junk arraye .
+
+2. 
+
+a. double* cat;
+b. double mouse[5];
+c. cat = mouse + 4;
+d. *cat = 25;
+e. *(mouse + 3) = 42;
+f. cat-=3;
+g. cat[1] = 17;
+h. cat[0] = 54;
+i. bool d = (cat == mouse);
+j. bool b = (*cat == *(cat+1));
+
+3.
+
+a.
+double mean(const double* scores, int numScores)
+{
+    double tot = 0; //removed const double* ptr
+    for( int i = 0; i < numScores; i++)
+    {
+        tot += *(scores+i); // add i to scores to get value at pos i
+    }
+    return tot/numScores;
+}
+
+b.
+const char* findTheChar(const char* str, char chr)
+{
+    for (int k = 0; *(str+k) != '\0'; k++) // str[k] = str + k and check if value is null byte
+        if (*(str+k) == chr) // check if value at str+k is chr
+            return (str+k);   // returns pointer whch is str+k
+    return nullptr;
+}
+
+c.
+const char* findTheChar(const char str[], char chr)
+{
+    while(*str != '\0')
+    {
+        if(*str == chr){return str;}
+        str++;
+    }
+    return nullptr;
+}
+
+4.
+
+#include <iostream>
+using namespace std;
+
+int* maxwell(int* a, int* b)
+{
+    if (*a > *b)
+        return a;
+    else
+        return b;
+}
+
+void swap1(int* a, int* b)
+{    
+    int* temp = a;
+    a = b;
+    b = temp;
+}
+
+void swap2(int* a, int* b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main()
+{
+    int array[6] = { 5, 3, 4, 17, 22, 19 };
+
+    int* ptr = maxwell(array, &array[2]); 
+    /*
+    maxwell({5, 3, 4, 17, 22, 19}, {4, 17, 22, 19})
+    in maxwell function - compares value at pos 1 and pos 2 (5 > 4), 
+    which is true and returns pointer a (a = array)
+    and sets ptr = array 
+    */
+
+    *ptr = -1; 
+    /* 
+    sets first element of arr to -1 
+    array = {-1,3,4,17,22,19}
+    */
+
+    ptr += 2; // sets address of ptr to position 2
+
+    ptr[1] = 9;
+    /*
+    ptr[1] -> ptr+1 
+    array = {-1,3,4,9,22,19}
+    */
+
+    *(array+1) = 79;
+    /*
+    sets value at array at position 1 to 79
+    array = {-1,79,4,9,22,19}
+    */
+
+    cout << &array[5] - ptr << endl; // prints 3 because ptr is at position 2, so 5-2=3
+
+    swap1(&array[0], &array[1]); //doesnt swap anything just changes where the pointers point
+
+    swap2(array, &array[2]);
+    /*
+    swaps value at *a and *b:
+    stores first pos value in temp
+    sets value at first pos to value at pos 2
+    sets value at second pos to temp which was the value of first pos
+    array = {4,79,-1,9,22,19}
+    */
+
+    for (int i = 0; i < 6; i++)
+        cout << array[i] << endl;
+    /*
+    prints:
+    4
+    79
+    -1
+    9
+    22
+    19
+    */
+} 
+/* final output of the program is:
+3
+4
+79
+-1
+9
+22
+19
+*/
+
+5.
+
+void removeS(char* ptr)
+{
+    char* temp = ptr; // creates pointer and points to ptr
+    while(*ptr != '\0') // checks if ptr value is null byte (end of string)
+    {
+        //checks if char is not equal to s --> sets value at ptr to be char increments ptr
+        if(*temp != 's' && *temp != 'S'){*ptr = *temp; ptr++;}
+        temp++; //increments temp variable to find the next non s character to add to cstring(ptr)
+    }
+}
+
+int main()
+{
+    char msg[50] = "She'll blossom like a massless princess.";
+    removeS(msg);
+    cout << msg;  // prints   he'll bloom like a male prince.
+}

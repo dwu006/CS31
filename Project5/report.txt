@@ -1,0 +1,113 @@
+Daniel Wu - CS31 Fall 2024 Project 5 report
+
+a. Some obstacles I faced was checking the number of stars and planets in each guess. I had to make sure I didn't count one letter as both a star and a planet, so
+I used a for loop to check the char at a pos from both guess and the selected word and if it didnt match check if it does exist in the char exists in the selected 
+word and this can determine if I increment stars or planets. I also had to create a loop and a check algorithm to ensure the guess is a valid test, by looping to 
+check the case of each char in guess and if length of guess is too short or too long and also checking if the guess is in the array. 
+
+
+b. 
+
+int runOneRound(char words[][], int nWords, int wordnum) 
+returns int, takes 2d array of cstrings, # of cstrings in array, index of selected word
+
+if # of cstrings is less than 1, index of selected word is less than 0, or index is greater than # of words
+    return -1
+char guess (to store guess)
+int stars, planets, guessCount
+do 
+    do
+        get guess from user
+        while guess length greater than maxwordlen
+            print trial word must be 4 to 6 letters
+            asks for input agian
+
+        copies guess to variable if above passes
+        
+        bool letter 
+        for loop    
+            if not lowercase or strlen of guess is less than 4 or greater than 6
+                letter to false
+                break out of for loop
+        
+        bool exist
+        for loop
+            if guess is in char array 
+                exist to true
+                break out of for loop
+            else 
+                exist to false
+            
+        if letter false
+            print trial word must be word 4 to 6 letters
+        else if exist is true
+            break out of while loop
+        else 
+            print i dont know that word
+    while true
+
+    increment guessCount
+
+    create bool starCount, planetCount to coutn stars, planets
+    loop through guess word 
+        if letter in guess equal to letter in word 
+            stars++
+            starCount at that pos -> true'
+
+    loop through guess
+        if letter is in word and not a star
+            loop through guess
+                if letter is in words and not a star and not a planet   
+                    planets++
+                    planetCount at that pos -> true
+                    break out of loop
+
+    if stars equal to length of selected word
+        break
+    
+    print stars and planets
+
+    stars = 0, planets = 0
+
+while(guess doesnt equal to selected word)
+
+return guessCount
+---------------------------------------------------------------------
+int main
+
+    char w [maxwords][maxwordlen+1]
+    int n -> getwords(w, 8000, wordfilename)
+
+    if n (# of words) less than 0
+        print no words loaded cant play 
+        exit
+    int rounds
+    ask user for # of rounds
+    ignore spaces or \n
+
+    if rounds less than 0
+        print rounds must be positive
+        exit
+    
+    int min, max = 0
+    double average = 0
+
+    for loop, loop rounds times
+        print Round #
+        int randomNum -> random(0, n-1)
+        print length of secret word
+        int numGuess -> runOneRound(w, maxwords, randomNum)
+        if i equal to 1 
+            set min and max to numGuess
+        if numGuess greater than 1
+            print you got it in 'numGuess' times
+        else if numGuess == 1
+            print you got it in 1 try 
+        if numGuess less than min
+            min -> numGuess
+        else if numGuess greater than max
+            max = numGuess
+        calculate average
+        set precision to 2 digits
+        print average, min, max
+        
