@@ -1,0 +1,142 @@
+Daniel Wu
+CS31 Fall 2024 - Project 3
+
+a. I had trouble with the coding sequence for computeVotes and wasn't sure what was the best way to start the function, so although my end program worked 
+it was kind of messy. Also I didn't account for a couple of specific test cases which made me have to rewrite parts of my program. 
+
+b.
+function isValidUppercaseStateCode 
+return bool, takes in string
+
+checks if statecode is length 2 and if it is in string of state codes
+----------------------------
+function hasRightSyntax
+return bool, takes in string
+
+while length of string isnt 0
+    if first char is a party code
+        if second char is a digit
+            if third char is a digit
+                if string size greater than 4
+                    if 4th and 5th char are state code
+                        substr everything after 5th char
+                    else return false
+                else return false   
+            else 
+                if string size greater than 3
+                    if 3th and 4th char are state code
+                        substr everything after 4th char
+                    else return false
+                else return false
+        else return false   
+    else return false
+return true   
+---------------------------
+function checkZeroes
+return bool, takes string
+
+loops pollData size using i 
+    if char in pollData is 0
+        if the char after the above 0 exists and is also 0
+            return true
+        else if the char after the 0 exists and isnt a digit and there isn't another 0 before
+            return true
+    if current polldata str has 2 digit # 
+        inc i by 4
+    else if current polldata str has 1 digit # 
+        inc i by 4
+    else 
+        return false
+return false
+---------------------------
+function computeVotes
+returns int, takes string, char, and int& (reference param)
+
+if not hasRightSyntax
+    return 1
+else if party code isnt abc
+    return 3
+else if pollData size 0
+    votes = 0
+    return 0;
+else if checkZero is true
+     return 2
+votes = 0
+for loop until != poll data length
+    reset i to 0
+    if poll data size = 0
+        break
+    if polldata at pos i equal party char
+        if polldata at pos i+2 is digit
+            adds 2 digit num to votes
+        else 
+            adds 1 digit num to votes
+    if polldata at pos i+2 is digit
+        substr rest polldata after 5th char
+    else 
+        substr rest polldata after 4th char
+return 0
+--------------------------
+
+c.  TEST CASES: 
+// check the right syntax
+assert(hasRightSyntax("R40TXD54CA") == true); 
+// check with same state code
+assert(hasRightSyntax("D5MER1Me") == true);   
+// check with invalid state code 
+assert(hasRightSyntax("R40MXD54CA") == false);    
+// check with invalid state code (2)
+assert(hasRightSyntax("D55C") == false);   
+// check with empty string       
+assert(hasRightSyntax("") == true); 
+  
+int votes;
+int result;
+
+// Test 1: Empty pollData string
+votes = 9999;
+result = computeVotes("", 'D', votes);
+assert(result == 0 && votes == 0);
+cout << "Test 1 passed!" << endl;
+
+// Test 2: Lowercase state codes and party
+votes = 9999;
+result = computeVotes("d28nyr40txd4hi", 'd', votes);
+assert(result == 0 && votes == 32);
+cout << "Test 2 passed!" << endl;
+
+// Test 3: Invalid state code
+votes = 9999;
+result = computeVotes("D28NY@40TXD4HI", 'D', votes);
+assert(result == 1 && votes == 9999);  
+cout << "Test 3 passed!" << endl;
+
+// Test 4: With invalid party char
+votes = 9999;
+result = computeVotes("D28NYR40TXD4HI", '@', votes);
+assert(result == 3 && votes == 9999); 
+cout << "Test 4 passed!" << endl;
+
+// Test 5: Test with 0 votes
+votes = 9999;
+result = computeVotes("D00CA", 'D', votes);
+assert(result == 2 && votes == 9999);  
+cout << "Test 5 passed!" << endl;
+
+// Test 6: Test correct # of votes
+votes = 9999;
+result = computeVotes("D10TXR15CA", 'R', votes);
+assert(result == 0 && votes == 15);
+cout << "Test 6 passed!" << endl;
+
+// Test 7: Incomplete poll data
+votes = 9999;
+result = computeVotes("D28N", 'D', votes);
+assert(result == 1 && votes == 9999);  
+cout << "Test 7 passed!" << endl;
+
+// Test 8: Upper and lower case poll data
+votes = 9999;
+result = computeVotes("d28nYr40TxD4Hi", 'D', votes);
+assert(result == 0 && votes == 32);
+cout << "Test 8 passed!" << endl;
