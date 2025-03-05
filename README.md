@@ -1,4 +1,4 @@
-# UCLA CS 31 - Fall 2024 - David Smallberg
+# UCLA CS31 - Fall 2024 - David Smallberg
 
 ## Project Scores
 | Project  | Score |
